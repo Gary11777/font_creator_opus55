@@ -1,0 +1,4 @@
+/vendor/
+/.phpunit.cache/
+/output/*
+!/output/.gitkeep
