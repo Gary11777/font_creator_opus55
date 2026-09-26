@@ -1,0 +1,279 @@
+:root {
+    --cell-size: 44px;
+    --cell-gap: 1px;
+    --color-bg: #f4f5f7;
+    --color-surface: #fff;
+    --color-text: #1d2330;
+    --color-muted: #667085;
+    --color-border: #d0d5dd;
+    --color-on: #000;
+    --color-hover-off: #e4e7ec;
+    --color-hover-on: #3a3f4b;
+    --color-accent: #2f6fed;
+    --color-danger: #c4320a;
+    --color-success: #067647;
+    --radius: 8px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.5;
+}
+
+code,
+pre {
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+
+h1,
+h2 {
+    margin: 0 0 .5rem;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 1rem;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.app {
+    display: grid;
+    grid-template-columns: auto minmax(260px, 340px);
+    grid-template-areas:
+        "header header"
+        "editor panel";
+    gap: 1.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.app__header {
+    grid-area: header;
+}
+
+.app__header p {
+    margin: 0;
+    color: var(--color-muted);
+}
+
+.editor {
+    grid-area: editor;
+    align-self: start;
+}
+
+.panel {
+    grid-area: panel;
+    display: grid;
+    gap: 1.5rem;
+    align-content: start;
+}
+
+.editor,
+.panel > section {
+    padding: 1.25rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+/* Matrix */
+
+.matrix8 {
+    border-collapse: separate;
+    border-spacing: var(--cell-gap);
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
+    user-select: none;
+}
+
+.matrix8 td {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    padding: 0;
+    background: var(--color-surface);
+}
+
+.matrix8 .cell {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color .08s ease-in-out;
+}
+
+.matrix8 td:hover .cell {
+    background: var(--color-hover-off);
+}
+
+.matrix8 td.is-on .cell {
+    background: var(--color-on);
+}
+
+.matrix8 td.is-on:hover .cell {
+    background: var(--color-hover-on);
+}
+
+.matrix8 .cell:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: -3px;
+}
+
+/* Controls */
+
+.toolbar {
+    display: flex;
+    gap: .5rem;
+    margin-top: 1rem;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    padding: .45rem .9rem;
+    font: inherit;
+    font-size: .9rem;
+    color: var(--color-text);
+    text-decoration: none;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: var(--color-bg);
+}
+
+.button:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 1px;
+}
+
+.button--primary {
+    color: #fff;
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.button--primary:hover {
+    background: #2459c4;
+}
+
+.button--danger {
+    color: var(--color-danger);
+}
+
+.button--small {
+    padding: .2rem .55rem;
+    font-size: .8rem;
+}
+
+.status {
+    min-height: 1.5em;
+    margin: .75rem 0 0;
+    font-size: .875rem;
+    color: var(--color-muted);
+}
+
+.status.is-success {
+    color: var(--color-success);
+}
+
+.status.is-error {
+    color: var(--color-danger);
+}
+
+/* Panel */
+
+.preview {
+    margin: 0;
+    padding: .75rem 1rem;
+    font-size: 1rem;
+    letter-spacing: .15em;
+    background: var(--color-bg);
+    border-radius: 6px;
+}
+
+.save-form {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+}
+
+.save-form input {
+    flex: 1;
+    min-width: 0;
+    padding: .4rem .6rem;
+    font: inherit;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+}
+
+.hint,
+.empty {
+    margin: .5rem 0 0;
+    font-size: .8rem;
+    color: var(--color-muted);
+}
+
+.glyph-list {
+    display: grid;
+    gap: .4rem;
+    margin: .75rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.glyph-list:empty {
+    display: none;
+}
+
+.glyph-item {
+    display: flex;
+    gap: .35rem;
+    align-items: center;
+}
+
+.glyph-item__label {
+    flex: 1;
+    overflow: hidden;
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    font-weight: 600;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 720px) {
+    .app {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "editor"
+            "panel";
+    }
+
+    :root {
+        --cell-size: min(10vw, 44px);
+    }
+}

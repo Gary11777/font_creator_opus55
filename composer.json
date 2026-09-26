@@ -1,0 +1,33 @@
+{
+    "name": "gary11777/font-creator",
+    "description": "Web-based 8x8 pixel font editor that writes glyphs to text files.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.4",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "FontCreator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "FontCreator\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "php -S localhost:8000 -t public public/index.php"
+        ],
+        "test": "phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
